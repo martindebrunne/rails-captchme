@@ -1,15 +1,12 @@
 # Rails::Captchme
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails/captchme`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rails-captchme'
+gem 'captchme'
 ```
 
 And then execute:
@@ -18,11 +15,33 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rails-captchme
+    $ gem install captchme
 
 ## Usage
 
-TODO: Write usage instructions here
+CONTROLLER
+
+After a POST action, in your controller use:
+```ruby
+captchme = CAPTCHME::Captchme.new(YOUR_PRIVATE_KEY, params, request.remote_ip)
+
+# send POST request to captchme server
+captchme.request
+
+# return true if captchme is OK
+captchme.is_valid?
+```
+
+VIEWS
+In your form
+(slim)
+```ruby
+= javascript_include_tag 'http://api.captchme.net/api/script?key=' + YOUR_PUBLIC_KEY
+```
+(erb)
+```ruby
+<%= javascript_include_tag 'http://api.captchme.net/api/script?key=' + YOUR_PUBLIC_KEY %>
+```
 
 ## Development
 
@@ -32,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rails-captchme. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/captchme. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
